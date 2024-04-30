@@ -1,0 +1,25 @@
+<!-- templates/tasks/add_task_note.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task Note</title>
+    <style>
+        /* Add custom CSS styles as needed */
+    </style>
+</head>
+<body>
+    <div class="add-note-container">
+        <h1>Add Task Note</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="notes">Notes:</label>
+                <textarea id="notes" name="notes" required></textarea>
+            </div>
+            <button type="submit">Save Note</button>
+        </form>
+    </div>
+</body>
+</html>

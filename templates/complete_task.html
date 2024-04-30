@@ -1,0 +1,25 @@
+<!-- templates/tasks/complete_task.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Task</title>
+    <style>
+        /* Add custom CSS styles as needed */
+    </style>
+</head>
+<body>
+    <div class="complete-task-container">
+        <h1>Complete Task</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="completed_reason">Completion Reason:</label>
+                <input type="text" id="completed_reason" name="completion_reason" required>
+            </div>
+            <button type="submit">Complete Task</button>
+        </form>
+    </div>
+</body>
+</html>

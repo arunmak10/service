@@ -1,0 +1,232 @@
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assigned Tasks</title>
+    <style>
+        /* Add custom CSS styles as needed */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assigned Tasks</h1>
+        <ul>
+            {% for task in assigned_tasks %}
+                <li>
+                    <div class="task-info">
+                        <h3>Task Name</h3>
+                        <div class="task-title">{{ task.title }}</div>
+                        <h3>Task Description</h3>
+                        <div class="task-description">{{ task.description }}</div>
+                    </div>
+                    {% if not task.completed %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="task_id" value="{{ task.id }}">
+                            <textarea name="notes" placeholder="Add notes"></textarea>
+                            <button type="submit" name="note_form">Add Note</button>
+                        </form>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="task_id" value="{{ task.id }}">
+                            <select name="completed_reason">
+                                <option value="" selected disabled>Select Completion Reason</option>
+                                {% for value, reason in task.COMPLETION_REASON_CHOICES %}
+                                    <option value="{{ value }}">{{ reason }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" name="completion_form">Complete Task</button>
+                        </form>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assigned Tasks</title>
+    <style>
+        /* Add custom CSS styles as needed */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .logout-btn {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assigned Tasks</h1>
+        <ul>
+            {% for task in assigned_tasks %}
+                <li>
+                    <div class="task-info">
+                        <h3>Task Name</h3>
+                        <div class="task-title">{{ task.title }}</div>
+                        <h3>Task Description</h3>
+                        <div class="task-description">{{ task.description }}</div>
+                    </div>
+                    {% if not task.completed %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="task_id" value="{{ task.id }}">
+                            <textarea name="notes" placeholder="Add notes"></textarea>
+                            <button type="submit" name="note_form">Add Note</button>
+                        </form>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="task_id" value="{{ task.id }}">
+                            <select name="completed_reason">
+                                <option value="" selected disabled>Select Completion Reason</option>
+                                {% for value, reason in task.COMPLETION_REASON_CHOICES %}
+                                    <option value="{{ value }}">{{ reason }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" name="completion_form">Complete Task</button>
+                        </form>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <!-- Logout button -->
+        <div class="logout-btn">
+            <a href="{% url 'worker_logout' %}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
