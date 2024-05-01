@@ -29,7 +29,3 @@ jobs:
         export DJANGO_SETTINGS_MODULE="field_service.settings"
         python -m pytest --cov=.
 
-    - name: Generate HTML coverage report
-      run: |
-        coverage html
-        mv htmlcov/* ${{ github.workspace }}/htmlcov
