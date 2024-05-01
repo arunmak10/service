@@ -27,7 +27,7 @@ jobs:
     - name: Run tests with coverage
       run: |
         export PYTHONPATH="${{ github.workspace }}"
-        export DJANGO_SETTINGS_MODULE="${{ github.workspace }}".field_service.settings
+        export DJANGO_SETTINGS_MODULE=field_service.settings
         python -m pytest --cov=.
 
     - name: Generate HTML coverage report
