@@ -1,15 +1,3 @@
-""" # workers/urls.py
-
-from django.urls import path
-from .views import WorkerListCreateAPIView, WorkerRetrieveUpdateDestroyAPIView, WorkerLoginView
-
-urlpatterns = [
-    path('login/', WorkerLoginView.as_view(), name='worker_login'),
-    path('workers/', WorkerListCreateAPIView.as_view(), name='worker_list_create'),
-    path('workers/<int:pk>/', WorkerRetrieveUpdateDestroyAPIView.as_view(), name='worker_retrieve_update_destroy'),
-]
- """
-
 # workers/urls.py
 from django.urls import path
 from .views import worker_login, view_assigned_tasks, add_task_note, complete_task, worker_signup, worker_logout

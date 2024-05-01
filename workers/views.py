@@ -1,58 +1,3 @@
-""" # workers/views.py
-
-from datetime import timezone
-from rest_framework import generics
-from .models import Worker
-from .serializers import WorkerSerializer
-
-class WorkerListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Worker.objects.all()
-    serializer_class = WorkerSerializer
-
-class WorkerRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Worker.objects.all()
-    serializer_class = WorkerSerializer
-
-
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from tasks.models import Task
-from tasks.forms import TaskNoteForm, TaskCompletionForm
-
-@login_required
-def view_assigned_tasks(request):
-    assigned_tasks = Task.objects.filter(assignee=request.user)
-    return render(request, 'assigned_tasks.html', {'assigned_tasks': assigned_tasks})
-
-@login_required
-def add_task_note(request, task_id):
-    task = Task.objects.get(pk=task_id)
-    if request.method == 'POST':
-        form = TaskNoteForm(request.POST)
-        if form.is_valid():
-            task.notes = form.cleaned_data['notes']
-            task.save()
-            return redirect('view_assigned_tasks')
-    else:
-        form = TaskNoteForm()
-    return render(request, 'add_task_note.html', {'form': form})
-
-@login_required
-def complete_task(request, task_id):
-    task = Task.objects.get(pk=task_id)
-    if request.method == 'POST':
-        form = TaskCompletionForm(request.POST)
-        if form.is_valid():
-            task.completed_at = timezone.now()
-            task.completion_reason = form.cleaned_data['completion_reason']
-            task.save()
-            return redirect('view_assigned_tasks')
-    else:
-        form = TaskCompletionForm()
-    return render(request, 'complete_task.html', {'form': form})
- """
-
 # workers/views.py
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
@@ -63,23 +8,7 @@ from .forms import WorkerLoginForm, WorkerSignupForm  # Import WorkerSignupForm
 from .models import Worker
 from tasks.models import Task
 from tasks.forms import TaskNoteForm, TaskCompletionForm
-from datetime import timezone
-
-""" def worker_login(request):
-    if request.method == 'POST':
-        form = WorkerLoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('view_assigned_tasks')
-            else:
-                messages.error(request, 'Invalid username or password.')
-    else:
-        form = WorkerLoginForm()
-    return render(request, 'workers/login_signup.html', {'form': form}) """
+from django.utils import timezone
 
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -109,10 +38,6 @@ def worker_login(request):
     return render(request, 'workers/login_signup.html', {'form': form})
 
 
-""" from django.contrib.auth import authenticate, login
-from .forms import WorkerSignupForm
-from .models import Worker
-"""
 def worker_signup(request):
     if request.method == 'POST':
         form = WorkerSignupForm(request.POST)
@@ -136,16 +61,6 @@ def worker_signup(request):
     return render(request, 'workers/login_signup.html', {'form': form})
 
 
-""" def view_assigned_tasks(request):
-    if request.user.get_username() in [worker.user.username for worker in Worker.objects.all()]:
-    #if isinstance(request.user, Worker):
-        assigned_tasks = Task.objects.filter(assignee=request.user)
-        return render(request, 'assigned_tasks.html', {'assigned_tasks': assigned_tasks})
-    else:
-        messages.error(request, 'You are not authorized to view this page.')
-        return redirect('worker_login') """
-
-
 def view_assigned_tasks(request):
     assigned_tasks = Task.objects.filter(assignee=request.user, completed=False)
     task_id = request.POST.get('task_id') if request.POST.get('task_id') else None
@@ -153,8 +68,7 @@ def view_assigned_tasks(request):
         if 'note_form' in request.POST:
             note_form = TaskNoteForm(request.POST)
             if note_form.is_valid():
-                #task_id =request.POST['task_id']
-                #task_id = note_form.cleaned_data['task_id']
+        
                 notes = note_form.cleaned_data['notes']
                 task = Task.objects.get(pk=task_id)
                 task.notes = notes

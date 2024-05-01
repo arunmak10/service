@@ -28,6 +28,8 @@ from django.contrib import admin
 from django.db.models import Count
 from .models import Task
 from workers.models import Worker  # Adjust this import based on your app structure
+#from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 
 class TaskAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'priority', 'severity', 'deadline', 'created_at')
@@ -36,7 +38,9 @@ class TaskAdmin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "assignee":
             # Exclude workers marked as not available
-            kwargs["queryset"] = Worker.objects.filter(is_available=True)
+            #kwargs["queryset"] = Worker.objects.filter(is_available=True)
+            kwargs["queryset"] = User.objects.filter(worker_profile__is_available=True)
+
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_queryset(self, request):

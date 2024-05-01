@@ -1,29 +1,3 @@
-""" # tasks/serializers.py
-
-from rest_framework import serializers
-from .models import Task, Complaint   
-
-class TaskSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Task
-        fields = '__all__'
-
-class ComplaintSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Complaint
-        fields = '__all__'
-
-
-class TaskCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Task
-        fields = ['title', 'description', 'priority', 'severity', 'deadline', 'assignee']
-
-class TaskUpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Task
-        fields = ['completed_at', 'completed_reason']
- """
 
 from rest_framework import serializers
 from .models import Task, Complaint   
