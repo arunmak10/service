@@ -1,4 +1,4 @@
-import subprocess
+""" import subprocess
 import logging
 
 # Configure logging
@@ -32,3 +32,4 @@ if __name__ == "__main__":
     
     # Run tests
     
+ """
