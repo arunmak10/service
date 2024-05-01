@@ -26,7 +26,7 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        export DJANGO_SETTINGS_MODULE=field_service
+        export DJANGO_SETTINGS_MODULE="field_service.settings"
         python -m pytest --cov=.
 
     - name: Generate HTML coverage report

@@ -24,6 +24,8 @@ class Task(models.Model):
     ]
     completed_reason = models.CharField(max_length=100, choices=COMPLETION_REASON_CHOICES, null=True, blank=True)
     notes = models.TextField(blank=True)
+    class Meta:
+            app_label = 'tasks'
 
 class Complaint(models.Model):
     title = models.CharField(max_length=100)
@@ -34,5 +36,4 @@ class Complaint(models.Model):
 
     def __str__(self):
         return self.title
-class Meta:
-        app_label = 'tasks'
+    
