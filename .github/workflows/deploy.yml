@@ -26,7 +26,7 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        python -m pytest --cov=.
+        python -m pytest --cov=service
         
     - name: Generate HTML coverage report
       run: |
