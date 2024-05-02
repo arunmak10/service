@@ -55,7 +55,7 @@ pip install -r requirements.txt
    - `DJANGO_SETTINGS_MODULE`: Django settings module (`field_service.settings` in this case). 
    -  export DJANGO_SETTINGS_MODULE="field_service.settings"
    - `PYTHONPATH`: Root directory of the project.
-   - echo $PYTHONPATH = .
+   - export $PYTHONPATH = .
 
 2. Configure database settings in `settings.py`. By default, SQLite is used.
 
