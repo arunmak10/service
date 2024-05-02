@@ -1,9 +1,11 @@
-""" import subprocess
+import subprocess
 import logging
-
+import os
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
 
 def run_tests():
     try:
@@ -20,9 +22,12 @@ def open_html_report():
     except FileNotFoundError as e:
         logger.error(f"Error opening HTML report: {e}")
 
-if __name__ == "__main__":
+def auto_run():
     try:
         # Start the program
+        # Set environment variables
+        #os.environ["DJANGO_SETTINGS_MODULE"] = "field_service.settings"
+        #os.environ["PYTHONPATH"] = "."
         run_tests()
     
         # Open HTML report
@@ -31,5 +36,4 @@ if __name__ == "__main__":
         logger.error(f"Error starting the program: {e}")
     
     # Run tests
-    
- """
+
